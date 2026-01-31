@@ -13,6 +13,8 @@ const client = new OpenAI( {
 	baseURL: "https://api.groq.com/openai/v1",
 } )
 
+const context = []
+
 app.use( cors() )
 
 app.get( "/", ( req, res ) => {
@@ -24,12 +26,18 @@ app.post( "/prompt", async ( req, res ) => {
 
 	const { prompt } = req.body
 
-	const response = await client.responses.create( {
+	context.push( { role: "user", content: prompt } )
+
+	const response = await client.chat.completions.create( {
 		model: "openai/gpt-oss-20b",
-		input: prompt,
+		messages: context,
+		max_tokens: 1024,
 	} )
 
-	res.send( { answer: response.output_text } )
+	const assistantMessage = response.choices[0].message.content
+	context.push( { role: "assistant", content: assistantMessage } )
+
+	res.send( { answer: assistantMessage } )
 } )
 
 app.listen( PORT, () => console.log( `Server ready at: ${ PORT }`) )
