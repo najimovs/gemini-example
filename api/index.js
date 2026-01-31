@@ -1,13 +1,17 @@
 import express from "express"
 import cors from "cors"
-import { GoogleGenAI } from "@google/genai"
+import OpenAI from "openai"
 
 const PORT = process.env.PORT || 3_000
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 
 const app = express()
 
-const ai = new GoogleGenAI( { apiKey: GEMINI_API_KEY } )
+const client = new OpenAI( {
+	apiKey: process.env.GROQ_API_KEY,
+	baseURL: "https://api.groq.com/openai/v1",
+} )
+
+console.log( client )
 
 app.use( cors() )
 
