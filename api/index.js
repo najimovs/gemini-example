@@ -1,5 +1,8 @@
 import express from "express"
 import cors from "cors"
+import * as genai from "@google/genai"
+
+console.log( genai )
 
 const PORT = process.env.PORT || 3_000
 const app = express()
