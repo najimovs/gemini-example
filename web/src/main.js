@@ -1,5 +1,7 @@
 import "./main.css"
 
+import { markdown } from "markdown"
+
 const textarea = document.getElementById( "textarea" )
 const messages = document.getElementById( "messages" )
 const sendBtn = document.getElementById( "send-btn" )
@@ -80,7 +82,7 @@ function createMessageItem( message, options ) {
 
 	const content = document.createElement( "div" )
 	content.className = "message-content"
-	content.textContent = message
+	content.innerHTML = markdown.toHTML( message )
 
 	const label = document.createElement( "div" )
 	label.className = "message-label"
