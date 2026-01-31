@@ -11,5 +11,9 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"packageManager": "pnpm@10.19.0"
+	"packageManager": "pnpm@10.19.0",
+	"dependencies": {
+		"cors": "^2.8.6",
+		"express": "^5.2.1"
+	}
 }
